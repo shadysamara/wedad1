@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:wedad_application/Product.dart';
 import 'package:wedad_application/custom_product_widget.dart';
+import 'package:wedad_application/instegram_clone/instegram_home.dart';
 import 'package:wedad_application/shady_widget.dart';
 
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home:ListViewTest()));
+    home:InstegramHome()));
 }
 class FirstScreen extends StatelessWidget{
 List<Product> products = [
