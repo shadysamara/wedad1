@@ -3,12 +3,13 @@ import 'package:wedad_application/Product.dart';
 import 'package:wedad_application/custom_product_widget.dart';
 import 'package:wedad_application/instegram_clone/instegram_home.dart';
 import 'package:wedad_application/shady_widget.dart';
+import 'package:wedad_application/stateful_widget/stateful_test.dart';
 
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home:InstegramHome()));
+    home:X()));
 }
 class FirstScreen extends StatelessWidget{
 List<Product> products = [
