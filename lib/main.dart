@@ -15,6 +15,7 @@ import 'package:wedad_application/file_test.dart';
 import 'package:wedad_application/instegram_clone/instegram_home.dart';
 import 'package:wedad_application/saleh_provider.dart';
 import 'package:wedad_application/shady_widget.dart';
+import 'package:wedad_application/todo_app/todo_home.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,7 @@ await FlutterDownloader.initialize(
     child: 
        MaterialApp(
         debugShowCheckedModeBanner: false,
-        home:FileTest())
+        home:TodoHomeScreen())
    
   ));
 }
