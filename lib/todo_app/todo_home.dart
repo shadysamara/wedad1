@@ -10,8 +10,9 @@ class TodoHomeScreen extends StatelessWidget{
    return DefaultTabController(
      length: 3,
      child: Scaffold(
+       
        appBar: AppBar(
-         backgroundColor:Colors.black38,
+         backgroundColor:Colors.black87,
          title: Text('TODO APP'),
          bottom: TabBar(tabs: [
            Tab(icon: Icon(Icons.list),),
@@ -20,11 +21,14 @@ class TodoHomeScreen extends StatelessWidget{
          ],indicatorWeight: 5,
          indicatorColor: Colors.white,),
          ),
-         body: TabBarView(children: [
-           AllTasks(),
-           CompleteTasks(),
-           InCompleteTasks()
-         ]),
+         body: Container(
+           color: Colors.black87,
+           child: TabBarView(children: [
+             AllTasks(),
+             CompleteTasks(),
+             InCompleteTasks()
+           ]),
+         ),
      ),
    );
   }
