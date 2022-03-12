@@ -1,15 +1,36 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:android_path_provider/android_path_provider.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:wedad_application/Product.dart';
 import 'package:wedad_application/custom_product_widget.dart';
+import 'package:wedad_application/file_test.dart';
 import 'package:wedad_application/instegram_clone/instegram_home.dart';
+import 'package:wedad_application/saleh_provider.dart';
 import 'package:wedad_application/shady_widget.dart';
-import 'package:wedad_application/stateful_widget/stateful_test.dart';
 
-
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home:X()));
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+await FlutterDownloader.initialize(
+  debug: true // optional: set false to disable printing logs to console
+);
+  runApp(ChangeNotifierProvider<SalehProvider>(
+    create: (context){
+      return SalehProvider();
+    },
+    child: 
+       MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home:FileTest())
+   
+  ));
 }
 class FirstScreen extends StatelessWidget{
 List<Product> products = [
@@ -137,5 +158,63 @@ class ListViewTest extends StatelessWidget{
         return ProductWidget(products[index]);
       })
     );
+  }
+}
+
+class FileTest extends StatefulWidget{
+  @override
+  State<FileTest> createState() => _FileTestState();
+}
+
+class _FileTestState extends State<FileTest> {
+   void showDownloadProgress(received, total) {
+    if (total != -1) {
+      print((received / total * 100).toStringAsFixed(0) + "%");
+    }
+
+  }
+   Future download2(String url) async {
+    try {
+
+if (await Permission.storage.request().isGranted) {
+ String path =
+                       await AndroidPathProvider.downloadsPath;
+                  //String fullPath = tempDir.path + "/boo2.pdf'";
+                  String fullPath = "$path/test.docx";
+                  print('full path ${fullPath}');
+      Response response = await Dio().get(
+        url,
+        onReceiveProgress: showDownloadProgress,
+        //Received data with List<int>
+        options: Options(
+            responseType: ResponseType.bytes,
+            followRedirects: false,
+            validateStatus: (status) {
+              return status! < 500;
+            }),
+      );
+      log(response.headers.toString());
+        log(fullPath.toString());
+      File file = File(fullPath);
+      var raf = file.openSync(mode: FileMode.write);
+      // response.data is List<int> type
+      raf.writeFromSync(response.data);
+      await raf.close();
+      OpenFile.open(fullPath);}
+    } catch (e) {
+      print(e);
+    }
+  }
+  
+   @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(body: Center(child: RaisedButton(onPressed: () async{
+
+  
+    Provider.of<SalehProvider>(context,listen: false).download2('https://publishbrand.homeshopuae.com/public/uploads/packages/attach1645864112_43719file.docx');
+  
+
+    },)),);
   }
 }

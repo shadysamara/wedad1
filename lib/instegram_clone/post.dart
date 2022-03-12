@@ -1,8 +1,12 @@
+import 'package:wedad_application/instegram_clone/comment.dart';
+
 class Post{
   String imageUrl;
   String title;
   User user;
-  Post({required this.imageUrl,required this.title,required this.user});
+  bool isFavourite;
+  List<Comment> comments = [];
+  Post({required this.imageUrl,required this.title,required this.user,this.isFavourite=false});
 }
 class User{
   String imageUrl;
