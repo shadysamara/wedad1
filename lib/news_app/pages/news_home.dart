@@ -5,7 +5,10 @@ import 'package:wedad_application/news_app/models/news_model.dart';
 import 'package:wedad_application/news_app/widgets/news_widget.dart';
 
 class NewsHome extends StatelessWidget{
-  AllNewsModel allNewsModel = AllNewsModel();
+  AllNewsModel allNewsModel;
+  Function function;
+  NewsHome(this.allNewsModel,this.function);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -14,8 +17,8 @@ class NewsHome extends StatelessWidget{
        itemBuilder: (context,index){
          return InkWell(
            onTap: (){
-         
-             launch(allNewsModel.articles![index].url!);
+         function(allNewsModel.articles![index]);
+           
            },
            child: CustomNewsWidget(allNewsModel.articles![index]));
        })
