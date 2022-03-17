@@ -13,6 +13,8 @@ import 'package:wedad_application/Product.dart';
 import 'package:wedad_application/custom_product_widget.dart';
 import 'package:wedad_application/file_test.dart';
 import 'package:wedad_application/instegram_clone/instegram_home.dart';
+import 'package:wedad_application/news_app/news_main_page.dart';
+import 'package:wedad_application/news_app/pages/news_home.dart';
 import 'package:wedad_application/saleh_provider.dart';
 import 'package:wedad_application/shady_widget.dart';
 import 'package:wedad_application/todo_app/todo_home.dart';
@@ -29,7 +31,7 @@ await FlutterDownloader.initialize(
     child: 
        MaterialApp(
         debugShowCheckedModeBanner: false,
-        home:TodoHomeScreen())
+        home:MainPage())
    
   ));
 }
