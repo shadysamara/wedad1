@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:wedad_application/todo_app/models/task_model.dart';
 
-class TaskWidget extends StatefulWidget{
+class TaskWidget extends StatelessWidget{
   Task task;
-  TaskWidget(this.task);
+  Function function;
+  TaskWidget(this.task,this.function);
 
-  @override
-  State<TaskWidget> createState() => _TaskWidgetState();
-}
-
-class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
       margin: EdgeInsets.symmetric(vertical: 3,horizontal: 5),
       decoration: BoxDecoration(
-        gradient: widget.task.isComplete? LinearGradient(colors: [
+        gradient: task.isComplete? LinearGradient(colors: [
           Color(0xdd8A39E1),
           Color(0xaaB667F1),
         ]):LinearGradient(colors: [
@@ -29,13 +25,10 @@ class _TaskWidgetState extends State<TaskWidget> {
       child: CheckboxListTile(
         activeColor: Colors.white,
         checkColor: Colors.black,
-        value: widget.task.isComplete,
-      title: Text(widget.task.title,style: TextStyle(fontSize: 18),),
+        value: task.isComplete,
+      title: Text(task.title,style: TextStyle(fontSize: 18),),
       onChanged: (v){
-        widget.task.isComplete = !widget.task.isComplete;
-      setState(() {
-        
-      });
+       function(task);
       },
       
       ),
